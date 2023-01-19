@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: rtl433-scanner
+  name: rtl433-scanner
+spec:
+  replicas: 1
+  serviceName: rtl433-scanner
+  selector:
+    matchLabels:
+      app: rtl433-scanner
+  template:
+    metadata:
+      labels:
+        app: rtl433-scanner
+    spec:
+      containers:
+      - name: rtl433-scanner
+        image: ghcr.io/mmaschenk/docker-rtl433-scanner:main
+        envFrom:
+        - secretRef:
+            name: passwords
+        - configMapRef:
+            name: environment
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "50m"
+        securityContext:
+          privileged: true

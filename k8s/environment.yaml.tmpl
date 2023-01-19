@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environment
+data:
+  MQTT_URL: "url to mqtt server/port"
+  MQTT_USER: "Name of the mqtt user that will read temperature entries"
+  MQTT_RTL433_EVENT_QUEUE: "mqtt queue where events will be placed"
